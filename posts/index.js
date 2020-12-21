@@ -1,6 +1,29 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const { randomBytes } = require("crypto");
+
 const app = express();
+app.use(bodyParser.json());
 
-// app.get("/posts", (req, res) => {});
+const posts = {};
 
-// app.post("/posts", (req, res) => {});
+app.get("/posts", (req, res) => {
+  res.send(posts);
+});
+
+app.post("/posts", (req, res) => {
+  const id = randomBytes(4).toString("hex");
+  const { title } = req.body;
+
+  posts[id] = {
+    id,
+    title,
+  };
+
+  //send back a success created status with posts id object
+  res.status(201).send(posts[id]);
+});
+
+app.listen(4000, () => {
+  console.log("listening on 4000");
+});
