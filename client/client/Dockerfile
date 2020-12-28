@@ -1,6 +1,7 @@
 #base image
 FROM node:alpine
 
+ENV CI=true
 #allow all my project files to be included in the container
 WORKDIR /usr/app
 COPY ./package.json ./
