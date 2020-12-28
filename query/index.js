@@ -49,7 +49,7 @@ app.listen(4002, async () => {
   console.log("listening on 4002");
 
   //bring in sync of all the events that have been emitted till now
-  const res = await axios.get("http://localhost:4005/events");
+  const res = await axios.get("http://event-bus-srv:4005/events");
   //console.log(res.data);
   for (let event of res.data) {
     console.log("Processing the event : ", event.type);
